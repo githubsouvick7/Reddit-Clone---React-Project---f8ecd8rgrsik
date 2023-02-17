@@ -1,11 +1,17 @@
 import React from 'react'
 import '../styles/App.css';
+import Navbar from './Navbar';
+import Post from './Post';
 const App = () => {
 
 
   return (
-    <div id="main">
-    </div>
+    <>
+      <Navbar />
+      <div className="container">
+        <Post />
+      </div>
+    </>
   )
 }
 
