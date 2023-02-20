@@ -89,7 +89,7 @@ const Post = () => {
                     </form>
                 </div>
                 {
-                    todos.map(() => {
+                    todos.map((e, i) => {
                         return (
                             <>
                                 <div className="list">
@@ -115,7 +115,7 @@ const Post = () => {
                                             }
                                         </div>
                                         <div className='posttext'>
-                                            <h4>{todos}</h4>
+                                            <h4 key={i}>{todos}</h4>
                                         </div>
                                         <div className='like'>
                                             <div><i class="fa-solid fa-comment"></i> Comment</div>
