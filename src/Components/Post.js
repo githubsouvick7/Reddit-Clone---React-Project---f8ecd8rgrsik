@@ -4,7 +4,7 @@ import './Post.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { useAuth0 } from "@auth0/auth0-react";
-import DPost from './DyPost';
+import DyPost from './DyPost';
 
 
 const Post = () => {
@@ -36,7 +36,12 @@ const Post = () => {
         }
     };
 
-
+    const handleDeleteTodo = (index) => {
+        const newTodos = [...post];
+        newTodos.splice(index, 1);
+        setPost(newTodos);
+        localStorage.setItem('todos', JSON.stringify(newTodos));
+    };
 
     return (
         <>
@@ -78,7 +83,7 @@ const Post = () => {
                 {
                     post.map((ele, index) => {
                         return (
-                            <DPost key={index} post={ele} />
+                            <DyPost key={index} post={ele} onDelete={() => handleDeleteTodo(index)} />
                         )
                     })
                 }

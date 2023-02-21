@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import List from './List';
+import React, { useState } from 'react'
 import './Post.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { useAuth0 } from "@auth0/auth0-react";
-import DyPost from './DyPost';
 
-const DPost = ({ post }) => {
+const DyPost = ({ post, onDelete }) => {
     const { user, isAuthenticated } = useAuth0();
     const [count, setCount] = useState(0);
 
@@ -18,6 +16,9 @@ const DPost = ({ post }) => {
             setCount(count - 1);
         }
     }
+
+
+
     return (
         <>
             <div className="list">
@@ -33,7 +34,7 @@ const DPost = ({ post }) => {
                             isAuthenticated ? (
                                 <Tippy content={<p>Hide</p>}>
                                     <i class="fa-solid fa-eye-slash"
-                                    ></i>
+                                        onClick={onDelete}></i>
                                 </Tippy>
                             ) : (
                                 <Tippy content={<p>Please Login</p>}>
@@ -56,4 +57,4 @@ const DPost = ({ post }) => {
     )
 }
 
-export default DPost
+export default DyPost
