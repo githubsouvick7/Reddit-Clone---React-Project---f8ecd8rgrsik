@@ -8,26 +8,26 @@ import { Data } from './Data';
 const List = () => {
     const [count, setCount] = useState(0);
 
-    const plusCount = () => {
-        setCount(count + 1)
-    }
-    const minCount = () => {
-        if (count != 0) {
-            setCount(count - 1);
-        }
-    }
-
     return (
         <>
             {
                 Data.map(item => {
+                    const { vote, description } = item;
+                    const plusCount = () => {
+                        setCount(vote + 1)
+                    }
+                    const minCount = () => {
+                        if (vote != 0) {
+                            setCount(vote - 1);
+                        }
+                    }
                     return (
                         <div className="list">
                             <div className="sidebox">
                                 <Tippy content={<p>UpVote</p>}>
                                     <i class="fa-solid fa-arrow-up" onClick={plusCount}></i>
                                 </Tippy>
-                                <span>{count}</span>
+                                <span>{vote}</span>
                                 <Tippy content={<p>DownVote</p>}>
                                     <i class="fa-solid fa-arrow-down" onClick={minCount}></i>
                                 </Tippy>
@@ -41,7 +41,7 @@ const List = () => {
 
                                 </div>
                                 <div className='posttext'>
-                                    <h4>{item.description}</h4>
+                                    <h4>{description}</h4>
                                 </div>
                                 <div className='like'>
                                     <div><i class="fa-solid fa-comment"></i> Comment</div>
