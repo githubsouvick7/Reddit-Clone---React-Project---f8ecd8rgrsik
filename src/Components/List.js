@@ -1,35 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './List.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { useAuth0 } from "@auth0/auth0-react";
 import { Data } from './Data';
 
 const List = () => {
-    const [count, setCount] = useState(0);
-
     return (
         <>
             {
                 Data.map(item => {
                     const { vote, description } = item;
-                    const plusCount = () => {
-                        setCount(vote + 1)
-                    }
-                    const minCount = () => {
-                        if (vote != 0) {
-                            setCount(vote - 1);
-                        }
-                    }
                     return (
                         <div className="list">
                             <div className="sidebox">
                                 <Tippy content={<p>UpVote</p>}>
-                                    <i class="fa-solid fa-arrow-up" onClick={plusCount}></i>
+                                    <i class="fa-solid fa-arrow-up"></i>
                                 </Tippy>
                                 <span>{vote}</span>
                                 <Tippy content={<p>DownVote</p>}>
-                                    <i class="fa-solid fa-arrow-down" onClick={minCount}></i>
+                                    <i class="fa-solid fa-arrow-down"></i>
                                 </Tippy>
                             </div>
                             <div className="box">

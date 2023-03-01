@@ -12,16 +12,15 @@ const Post = () => {
     const [post, setPost] = useState([]);
     const { user, isAuthenticated } = useAuth0();
 
-
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem('todos'));
-        if (storedTodos) {
-            setPost(storedTodos);
+        const storedPost = JSON.parse(localStorage.getItem('post'));
+        if (storedPost) {
+            setPost(storedPost);
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(post));
+        localStorage.setItem('post', JSON.stringify(post));
     }, [post]);
 
     const handleInputChange = (event) => {
@@ -30,17 +29,17 @@ const Post = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        if (inputValue.trim() != "") {
+        if (inputValue.trim() !== "") {
             setPost([...post, inputValue]);
             setInputValue("");
         }
     };
 
     const handleDeleteTodo = (index) => {
-        const newTodos = [...post];
-        newTodos.splice(index, 1);
-        setPost(newTodos);
-        localStorage.setItem('todos', JSON.stringify(newTodos));
+        const newPost = [...post];
+        newPost.splice(index, 1);
+        setPost(newPost);
+        localStorage.setItem('post', JSON.stringify(newPost));
     };
 
     return (
@@ -49,16 +48,20 @@ const Post = () => {
                 <div className="post">
                     <div className='profile'>
                         {
-                            isAuthenticated ? (<Tippy content={<div>
-                                {user.name} <br />
-                                {user.email}
-                            </div>}>
+                            isAuthenticated ? (
+                                <Tippy content={<div>
+                                    {user.name} <br />
+                                    {user.email}
+                                </div>}>
+                                    <div className="prof">
+                                        <img src={user.picture} width={50} alt='image' />
+                                    </div>
+                                </Tippy>
+                            ) : (
                                 <div className="prof">
-                                    <img src={user.picture} width={50} />
+                                    <i class="fa-solid fa-user"></i>
                                 </div>
-                            </Tippy>) : (<div className="prof">
-                                <i class="fa-solid fa-user"></i>
-                            </div>)
+                            )
                         }
                     </div>
                     <form className='from' >
