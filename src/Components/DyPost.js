@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Post.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -8,25 +8,48 @@ const DyPost = ({ post, onDelete }) => {
     const { user, isAuthenticated } = useAuth0();
     const [count, setCount] = useState(0);
 
+    useEffect(() => {
+        const allCount = localStorage.getItem('count');
+        if (allCount) {
+            setCount(parseInt(allCount));
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('count', count);
+    }, [count])
+
     const plusCount = () => {
         setCount(count + 1)
     }
     const minCount = () => {
-        if (count != 0) {
+        if (count !== 0) {
             setCount(count - 1);
         }
     }
 
-
-
     return (
         <>
             <div className="list">
-                <div className="sidebox">
-                    <i class="fa-solid fa-arrow-up" onClick={plusCount}></i>
-                    <span>{count}</span>
-                    <i class="fa-solid fa-arrow-down" onClick={minCount}></i>
-                </div>
+                {
+                    isAuthenticated ? (
+                        <>
+                            <div className="sidebox">
+                                <i class="fa-solid fa-arrow-up" onClick={plusCount}></i>
+                                <span>{count}</span>
+                                <i class="fa-solid fa-arrow-down" onClick={minCount}></i>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="sidebox">
+                                <i class="fa-solid fa-arrow-up"></i>
+                                <span>{count}</span>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </div>
+                        </>
+                    )
+                }
                 <div className="box">
                     <div className='title'>
                         <button className='join'>join</button>

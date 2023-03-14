@@ -49,13 +49,6 @@ const Navbar = () => {
                             </>
                         )
                     }
-                    {/* <div className='login'>
-                    <button className='btn'>Login</button>
-                    <Tippy content={<p>User Not Found</p>}>
-                        <div className="prof">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                    </Tippy>*/}
                 </div>
             </div>
         </>

@@ -35,7 +35,7 @@ const Post = () => {
         }
     };
 
-    const handleDeleteTodo = (index) => {
+    const handleDeletePost = (index) => {
         const newPost = [...post];
         newPost.splice(index, 1);
         setPost(newPost);
@@ -86,7 +86,7 @@ const Post = () => {
                 {
                     post.map((ele, index) => {
                         return (
-                            <DyPost key={index} post={ele} onDelete={() => handleDeleteTodo(index)} />
+                            <DyPost key={index} post={ele} onDelete={() => handleDeletePost(index)} />
                         )
                     })
                 }
